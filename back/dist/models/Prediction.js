@@ -14,23 +14,23 @@ const predictionSchema = new Schema({
         required: true,
         trim: true
     },
-    listaPredicciones: [
-        {
-            idUser: {
-                type: mongoose.Types.ObjectId,
-                required: true
-            },
-            golesLocal: {
-                type: Number,
-                required: true,
-                trim: true
-            },
-            golesVisitante: {
-                type: Number,
-                required: true,
-                trim: true
-            },
-        }
-    ]
+    listaPredicciones: {
+        type: [
+            {
+                idUser: {
+                    type: mongoose.Types.ObjectId,
+                },
+                golesLocal: {
+                    type: Number,
+                    trim: true
+                },
+                golesVisitante: {
+                    type: Number,
+                    trim: true
+                },
+            }
+        ],
+        default: []
+    }
 });
 export default mongoose.model('Predictions', predictionSchema);

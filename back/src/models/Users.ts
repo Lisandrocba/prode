@@ -1,11 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface IUser extends Document {
+enum UserRole {
+    ADMIN = 'ADMIN',
+    UNAUTHORIZED = 'UNAUTHORIZED',
+    USER = 'USER'
+}
+export interface IUser extends Document {
     userName: string;
     nombre: string;
     apellido: string;
     email: string;
     puntos: number;
+    password: string;
+    rolUser: UserRole
 }
 
 const userSchema: Schema = new Schema({
@@ -34,6 +41,11 @@ const userSchema: Schema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    rolUser: {
+        type: String,
+        enum: Object.values(UserRole),
+        default: UserRole.UNAUTHORIZED,
     },
     puntos: {
         type: Number,

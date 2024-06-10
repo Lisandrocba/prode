@@ -1,4 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
+var UserRole;
+(function (UserRole) {
+    UserRole["ADMIN"] = "ADMIN";
+    UserRole["UNAUTHORIZED"] = "UNAUTHORIZED";
+    UserRole["USER"] = "USER";
+})(UserRole || (UserRole = {}));
 const userSchema = new Schema({
     userName: {
         type: String,
@@ -25,6 +31,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    rolUser: {
+        type: String,
+        enum: Object.values(UserRole),
+        default: UserRole.UNAUTHORIZED,
     },
     puntos: {
         type: Number,
