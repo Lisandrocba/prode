@@ -8,6 +8,7 @@ import adminMiddleware from '../middleware/adminMiddleware.js';
 const router = Router();
 
 router.get('/', (req: Request, res: Response)=>{
+    res.send('Hola mundo');
     router.use('/user', userRouter);
     router.use('/result', authMiddleware, adminMiddleware, resultRouter);
     router.use('/prediction',authMiddleware, predictionRouter);
