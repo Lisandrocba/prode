@@ -18,6 +18,7 @@ export const signup = async (req, res) => {
     }
 };
 export const login = async (req, res) => {
+    console.log(req.body);
     const { password, userName } = req.body;
     const userExist = await Users.findOne({ userName });
     if (!userExist)
@@ -33,7 +34,7 @@ export const login = async (req, res) => {
                 res.send({ status: 'success', token, userName, puntos, message: 'Usuario validado con exito' });
             }
             else {
-                return res.json({ status: 'error', message: 'Usuario o contraseña invalido' });
+                return res.status(401).send({ status: 'error', message: 'Usuario o contraseña invalido' });
             }
         });
     }
